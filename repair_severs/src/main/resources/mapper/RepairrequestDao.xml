@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.repair_severs.dao.RepairrequestDao">
+
+    <resultMap type="com.example.repair_severs.entity.Repairrequest" id="RepairrequestMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="requestCode" column="request_code" jdbcType="VARCHAR"/>
+        <result property="employeeName" column="employee_name" jdbcType="VARCHAR"/>
+        <result property="department" column="department" jdbcType="VARCHAR"/>
+        <result property="contactPhone" column="contact_phone" jdbcType="VARCHAR"/>
+        <result property="repairType" column="repair_type" jdbcType="VARCHAR"/>
+        <result property="assetCode" column="asset_code" jdbcType="VARCHAR"/>
+        <result property="assetName" column="asset_name" jdbcType="VARCHAR"/>
+        <result property="repairTitle" column="repair_title" jdbcType="VARCHAR"/>
+        <result property="repairLocation" column="repair_location" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="attachment" column="attachment" jdbcType="VARCHAR"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="userid" column="userid" jdbcType="INTEGER"/>
+        <result property="manyidu" column="manyidu" jdbcType="VARCHAR"/>
+        <result property="fuwuzhil" column="fuwuzhil" jdbcType="VARCHAR"/>
+        <result property="fuwushudu" column="fuwushudu" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RepairrequestMap">
+        select
+          id, request_code, employee_name, department, contact_phone, repair_type, asset_code, asset_name, repair_title, repair_location, description, attachment, created_at, status, userid, manyidu, fuwuzhil, fuwushudu
+        from repairrequest
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RepairrequestMap">
+        select
+          id, request_code, employee_name, department, contact_phone, repair_type, asset_code, asset_name, repair_title, repair_location, description, attachment, created_at, status, userid, manyidu, fuwuzhil, fuwushudu
+        from repairrequest
+        <where>
+            <if test="listpm.id != null">
+                and id = #{listpm.id}
+            </if>
+            <if test="listpm.requestCode != null and listpm.requestCode != ''">
+                and request_code = #{listpm.requestCode}
+            </if>
+            <if test="listpm.employeeName != null and listpm.employeeName != ''">
+                and employee_name = #{listpm.employeeName}
+            </if>
+            <if test="listpm.department != null and listpm.department != ''">
+                and department = #{listpm.department}
+            </if>
+            <if test="listpm.contactPhone != null and listpm.contactPhone != ''">
+                and contact_phone = #{listpm.contactPhone}
+            </if>
+            <if test="listpm.repairType != null and listpm.repairType != ''">
+                and repair_type = #{listpm.repairType}
+            </if>
+            <if test="listpm.assetCode != null and listpm.assetCode != ''">
+                and asset_code = #{listpm.assetCode}
+            </if>
+            <if test="listpm.assetName != null and listpm.assetName != ''">
+                and asset_name = #{listpm.assetName}
+            </if>
+            <if test="listpm.repairTitle != null and listpm.repairTitle != ''">
+                and repair_title = #{listpm.repairTitle}
+            </if>
+            <if test="listpm.repairLocation != null and listpm.repairLocation != ''">
+                and repair_location = #{listpm.repairLocation}
+            </if>
+            <if test="listpm.description != null and listpm.description != ''">
+                and description = #{listpm.description}
+            </if>
+            <if test="listpm.attachment != null and listpm.attachment != ''">
+                and attachment = #{listpm.attachment}
+            </if>
+            <if test="listpm.createdAt != null">
+                and created_at = #{listpm.createdAt}
+            </if>
+            <if test="listpm.status != null and listpm.status != ''">
+                and status = #{listpm.status}
+            </if>
+            <if test="listpm.userid != null">
+                and userid = #{listpm.userid}
+            </if>
+            <if test="listpm.manyidu != null and listpm.manyidu != ''">
+                and manyidu = #{listpm.manyidu}
+            </if>
+            <if test="listpm.fuwuzhil != null and listpm.fuwuzhil != ''">
+                and fuwuzhil = #{listpm.fuwuzhil}
+            </if>
+            <if test="listpm.fuwushudu != null and listpm.fuwushudu != ''">
+                and fuwushudu = #{listpm.fuwushudu}
+            </if>
+          <if test="1==1">
+           and id>0 order by id desc limit #{pageable.offset}, #{pageable.pageSize}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from repairrequest
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="requestCode != null and requestCode != ''">
+                and request_code = #{requestCode}
+            </if>
+            <if test="employeeName != null and employeeName != ''">
+                and employee_name = #{employeeName}
+            </if>
+            <if test="department != null and department != ''">
+                and department = #{department}
+            </if>
+            <if test="contactPhone != null and contactPhone != ''">
+                and contact_phone = #{contactPhone}
+            </if>
+            <if test="repairType != null and repairType != ''">
+                and repair_type = #{repairType}
+            </if>
+            <if test="assetCode != null and assetCode != ''">
+                and asset_code = #{assetCode}
+            </if>
+            <if test="assetName != null and assetName != ''">
+                and asset_name = #{assetName}
+            </if>
+            <if test="repairTitle != null and repairTitle != ''">
+                and repair_title = #{repairTitle}
+            </if>
+            <if test="repairLocation != null and repairLocation != ''">
+                and repair_location = #{repairLocation}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="attachment != null and attachment != ''">
+                and attachment = #{attachment}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="userid != null">
+                and userid = #{userid}
+            </if>
+            <if test="manyidu != null and manyidu != ''">
+                and manyidu = #{manyidu}
+            </if>
+            <if test="fuwuzhil != null and fuwuzhil != ''">
+                and fuwuzhil = #{fuwuzhil}
+            </if>
+            <if test="fuwushudu != null and fuwushudu != ''">
+                and fuwushudu = #{fuwushudu}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into repairrequest(request_code, employee_name, department, contact_phone, repair_type, asset_code, asset_name, repair_title, repair_location, description, attachment, created_at, status, userid, manyidu, fuwuzhil, fuwushudu)
+        values (#{requestCode}, #{employeeName}, #{department}, #{contactPhone}, #{repairType}, #{assetCode}, #{assetName}, #{repairTitle}, #{repairLocation}, #{description}, #{attachment}, #{createdAt}, #{status}, #{userid}, #{manyidu}, #{fuwuzhil}, #{fuwushudu})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into repairrequest(request_code, employee_name, department, contact_phone, repair_type, asset_code, asset_name, repair_title, repair_location, description, attachment, created_at, status, userid, manyidu, fuwuzhil, fuwushudu)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.requestCode}, #{entity.employeeName}, #{entity.department}, #{entity.contactPhone}, #{entity.repairType}, #{entity.assetCode}, #{entity.assetName}, #{entity.repairTitle}, #{entity.repairLocation}, #{entity.description}, #{entity.attachment}, #{entity.createdAt}, #{entity.status}, #{entity.userid}, #{entity.manyidu}, #{entity.fuwuzhil}, #{entity.fuwushudu})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into repairrequest(request_code, employee_name, department, contact_phone, repair_type, asset_code, asset_name, repair_title, repair_location, description, attachment, created_at, status, userid, manyidu, fuwuzhil, fuwushudu)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.requestCode}, #{entity.employeeName}, #{entity.department}, #{entity.contactPhone}, #{entity.repairType}, #{entity.assetCode}, #{entity.assetName}, #{entity.repairTitle}, #{entity.repairLocation}, #{entity.description}, #{entity.attachment}, #{entity.createdAt}, #{entity.status}, #{entity.userid}, #{entity.manyidu}, #{entity.fuwuzhil}, #{entity.fuwushudu})
+        </foreach>
+        on duplicate key update
+        request_code = values(request_code),
+        employee_name = values(employee_name),
+        department = values(department),
+        contact_phone = values(contact_phone),
+        repair_type = values(repair_type),
+        asset_code = values(asset_code),
+        asset_name = values(asset_name),
+        repair_title = values(repair_title),
+        repair_location = values(repair_location),
+        description = values(description),
+        attachment = values(attachment),
+        created_at = values(created_at),
+        status = values(status),
+        userid = values(userid),
+        manyidu = values(manyidu),
+        fuwuzhil = values(fuwuzhil),
+        fuwushudu = values(fuwushudu)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update repairrequest
+        <set>
+            <if test="requestCode != null and requestCode != ''">
+                request_code = #{requestCode},
+            </if>
+            <if test="employeeName != null and employeeName != ''">
+                employee_name = #{employeeName},
+            </if>
+            <if test="department != null and department != ''">
+                department = #{department},
+            </if>
+            <if test="contactPhone != null and contactPhone != ''">
+                contact_phone = #{contactPhone},
+            </if>
+            <if test="repairType != null and repairType != ''">
+                repair_type = #{repairType},
+            </if>
+            <if test="assetCode != null and assetCode != ''">
+                asset_code = #{assetCode},
+            </if>
+            <if test="assetName != null and assetName != ''">
+                asset_name = #{assetName},
+            </if>
+            <if test="repairTitle != null and repairTitle != ''">
+                repair_title = #{repairTitle},
+            </if>
+            <if test="repairLocation != null and repairLocation != ''">
+                repair_location = #{repairLocation},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="attachment != null and attachment != ''">
+                attachment = #{attachment},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="userid != null">
+                userid = #{userid},
+            </if>
+            <if test="manyidu != null and manyidu != ''">
+                manyidu = #{manyidu},
+            </if>
+            <if test="fuwuzhil != null and fuwuzhil != ''">
+                fuwuzhil = #{fuwuzhil},
+            </if>
+            <if test="fuwushudu != null and fuwushudu != ''">
+                fuwushudu = #{fuwushudu},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from repairrequest where id = #{id}
+    </delete>
+
+    <select id="finduserid" resultMap="RepairrequestMap">
+        select
+            id, request_code, employee_name, department, contact_phone, repair_type, asset_code, asset_name, repair_title, repair_location, description, attachment, created_at, status, userid, manyidu, fuwuzhil, fuwushudu
+        from repairrequest
+        where userid = #{userid}
+    </select>
+</mapper>
+
